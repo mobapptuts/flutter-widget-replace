@@ -26,11 +26,25 @@ class LoadImage extends StatefulWidget {
 }
 
 class LoadImageState extends State<LoadImage> {
+  Photo _selectedPhotos = photos[0];
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('Image Downloaded'),
+        actions: <Widget>[
+          new PopupMenuButton(
+              itemBuilder: (BuildContext context) {
+                return photos.map((Photo photo) {
+                  return new PopupMenuItem(
+                      child: new ListTile(
+                        title: photo.title,
+                      ),
+                  );
+                }).toList();
+              },
+          )
+        ],
       ),
       body: new ImageUrl(
         imageUrl: _imageUrlOne,
