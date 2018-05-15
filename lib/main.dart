@@ -63,14 +63,26 @@ class LoadImageState extends State<LoadImage> {
             new ListTile(
               leading: photos[0].icon,
               title: photos[0].title,
+              onTap: () {
+                _selectedPhoto(photos[0]);
+                Navigator.pop(context);
+              },
             ),
             new ListTile(
               leading: photos[1].icon,
               title: photos[1].title,
+              onTap: () {
+                _selectedPhoto(photos[1]);
+                Navigator.pop(context);
+              },
             ),
             new ListTile(
               leading: photos[2].icon,
               title: photos[2].title,
+              onTap: () {
+                _selectedPhoto(photos[2]);
+                Navigator.pop(context);
+              },
             ),
           ],
         ),
