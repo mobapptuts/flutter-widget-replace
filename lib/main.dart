@@ -57,6 +57,24 @@ class LoadImageState extends State<LoadImage> {
           )
         ],
       ),
+      drawer: new Drawer(
+        child: new ListView(
+          children: <Widget>[
+            new ListTile(
+              leading: photos[0].icon,
+              title: photos[0].title,
+            ),
+            new ListTile(
+              leading: photos[1].icon,
+              title: photos[1].title,
+            ),
+            new ListTile(
+              leading: photos[2].icon,
+              title: photos[2].title,
+            ),
+          ],
+        ),
+      ),
       body: new ImageUrl(
         imageUrl: _selectedPhotos.url,
       ),
