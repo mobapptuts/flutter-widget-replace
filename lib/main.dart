@@ -9,13 +9,14 @@ void main() => runApp(new MaterialApp(title: 'Wiget Switcher', home: new LoadIma
 class Photo {
   final Text title;
   final String url;
-  const Photo({this.title, this.url});
+  final Icon icon;
+  const Photo({this.title, this.url, this.icon});
 }
 
 const List<Photo> photos = <Photo> [
-  const Photo(title: const Text('ImageOne'), url: _imageUrlOne),
-  const Photo(title: const Text('ImageTwo'), url: _imageUrlTwo),
-  const Photo(title: const Text('ImageThree'), url: _imageUrlThree),
+  const Photo(title: const Text('ImageOne'), url: _imageUrlOne, icon: const Icon(Icons.looks_one)),
+  const Photo(title: const Text('ImageTwo'), url: _imageUrlTwo, icon: const Icon(Icons.looks_two)),
+  const Photo(title: const Text('ImageThree'), url: _imageUrlThree, icon: const Icon(Icons.looks_3)),
 ];
 
 class LoadImage extends StatefulWidget {
@@ -38,6 +39,7 @@ class LoadImageState extends State<LoadImage> {
                 return photos.map((Photo photo) {
                   return new PopupMenuItem(
                       child: new ListTile(
+                        leading: photo.icon,
                         title: photo.title,
                       ),
                   );
