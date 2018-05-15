@@ -28,6 +28,13 @@ class LoadImage extends StatefulWidget {
 
 class LoadImageState extends State<LoadImage> {
   Photo _selectedPhotos = photos[0];
+
+  void _selectedPhoto(Photo photo) {
+    setState(() {
+      _selectedPhotos = photo;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -38,6 +45,7 @@ class LoadImageState extends State<LoadImage> {
               itemBuilder: (BuildContext context) {
                 return photos.map((Photo photo) {
                   return new PopupMenuItem(
+                    value: photo,
                       child: new ListTile(
                         leading: photo.icon,
                         title: photo.title,
@@ -45,11 +53,12 @@ class LoadImageState extends State<LoadImage> {
                   );
                 }).toList();
               },
+            onSelected: _selectedPhoto,
           )
         ],
       ),
       body: new ImageUrl(
-        imageUrl: _imageUrlOne,
+        imageUrl: _selectedPhotos.url,
       ),
     );
   }
