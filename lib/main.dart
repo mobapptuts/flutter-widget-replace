@@ -137,8 +137,13 @@ class LoadImageState extends State<LoadImage>
           ],
         ),
       ),
-      body: new ImageUrl(
-        imageUrl: _selectedPhotos.url,
+      body: new TabBarView(
+        controller: _tabController,
+        children: photos.map((Photo photo) {
+          return ImageUrl(
+            imageUrl: photo.url,
+          );
+        }).toList(),
       ),
       bottomNavigationBar: new BottomNavigationBar(
         currentIndex: _bottomNavBarIndex,
