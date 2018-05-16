@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
-const String _imageUrlOne = 'https://static.pexels.com/photos/596940/pexels-photo-596940.jpeg';
-const String _imageUrlTwo = 'https://images.pexels.com/photos/163065/mobile-phone-android-apps-phone-163065.jpeg';
-const String _imageUrlThree = 'https://static.pexels.com/photos/47261/pexels-photo-47261.jpeg';
+const String _imageUrlOne =
+    'https://static.pexels.com/photos/596940/pexels-photo-596940.jpeg';
+const String _imageUrlTwo =
+    'https://images.pexels.com/photos/163065/mobile-phone-android-apps-phone-163065.jpeg';
+const String _imageUrlThree =
+    'https://static.pexels.com/photos/47261/pexels-photo-47261.jpeg';
 
-void main() => runApp(new MaterialApp(title: 'Wiget Switcher', home: new LoadImage(),));
+void main() => runApp(new MaterialApp(
+      title: 'Wiget Switcher',
+      home: new LoadImage(),
+    ));
 
 class Photo {
   final Text title;
@@ -13,10 +19,19 @@ class Photo {
   const Photo({this.title, this.url, this.icon});
 }
 
-const List<Photo> photos = <Photo> [
-  const Photo(title: const Text('ImageOne'), url: _imageUrlOne, icon: const Icon(Icons.looks_one)),
-  const Photo(title: const Text('ImageTwo'), url: _imageUrlTwo, icon: const Icon(Icons.looks_two)),
-  const Photo(title: const Text('ImageThree'), url: _imageUrlThree, icon: const Icon(Icons.looks_3)),
+const List<Photo> photos = <Photo>[
+  const Photo(
+      title: const Text('ImageOne'),
+      url: _imageUrlOne,
+      icon: const Icon(Icons.looks_one)),
+  const Photo(
+      title: const Text('ImageTwo'),
+      url: _imageUrlTwo,
+      icon: const Icon(Icons.looks_two)),
+  const Photo(
+      title: const Text('ImageThree'),
+      url: _imageUrlThree,
+      icon: const Icon(Icons.looks_3)),
 ];
 
 class LoadImage extends StatefulWidget {
@@ -28,6 +43,7 @@ class LoadImage extends StatefulWidget {
 
 class LoadImageState extends State<LoadImage> {
   Photo _selectedPhotos = photos[0];
+  int _bottomNavBarIndex = 0;
 
   void _selectedPhoto(Photo photo) {
     setState(() {
@@ -42,17 +58,17 @@ class LoadImageState extends State<LoadImage> {
         title: new Text('Image Downloaded'),
         actions: <Widget>[
           new PopupMenuButton(
-              itemBuilder: (BuildContext context) {
-                return photos.map((Photo photo) {
-                  return new PopupMenuItem(
-                    value: photo,
-                      child: new ListTile(
-                        leading: photo.icon,
-                        title: photo.title,
-                      ),
-                  );
-                }).toList();
-              },
+            itemBuilder: (BuildContext context) {
+              return photos.map((Photo photo) {
+                return new PopupMenuItem(
+                  value: photo,
+                  child: new ListTile(
+                    leading: photo.icon,
+                    title: photo.title,
+                  ),
+                );
+              }).toList();
+            },
             onSelected: _selectedPhoto,
           )
         ],
@@ -90,6 +106,29 @@ class LoadImageState extends State<LoadImage> {
       body: new ImageUrl(
         imageUrl: _selectedPhotos.url,
       ),
+      bottomNavigationBar: new BottomNavigationBar(
+        currentIndex: _bottomNavBarIndex,
+        onTap: (int index) {
+          setState(() {
+            _bottomNavBarIndex = index;
+            _selectedPhoto(photos[index]);
+          });
+        },
+        items: [
+          new BottomNavigationBarItem(
+            icon: photos[0].icon,
+            title: photos[0].title,
+          ),
+          new BottomNavigationBarItem(
+            icon: photos[1].icon,
+            title: photos[1].title,
+          ),
+          new BottomNavigationBarItem(
+            icon: photos[2].icon,
+            title: photos[2].title,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -106,5 +145,4 @@ class ImageUrl extends StatelessWidget {
       height: double.infinity,
     );
   }
-
 }
