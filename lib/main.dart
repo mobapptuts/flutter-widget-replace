@@ -45,9 +45,23 @@ class LoadImage extends StatefulWidget {
   }
 }
 
-class LoadImageState extends State<LoadImage> {
+class LoadImageState extends State<LoadImage>
+  with SingleTickerProviderStateMixin {
   Photo _selectedPhotos = photos[0];
   int _bottomNavBarIndex = 0;
+  TabController _tabController;
+
+
+  @override
+  void initState() {
+    _tabController = new TabController(length: photos.length, vsync: this);
+  }
+
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+  }
 
   void _selectedPhoto(Photo photo) {
     setState(() {
