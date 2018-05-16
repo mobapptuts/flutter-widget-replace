@@ -65,6 +65,7 @@ class LoadImageState extends State<LoadImage>
     setState(() {
       _bottomNavBarIndex = photo.index;
       _selectedPhotos = photo;
+      _tabController.index = photo.index;
     });
   }
 
