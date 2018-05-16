@@ -13,22 +13,26 @@ void main() => runApp(new MaterialApp(
     ));
 
 class Photo {
+  final int index;
   final Text title;
   final String url;
   final Icon icon;
-  const Photo({this.title, this.url, this.icon});
+  const Photo({this.index, this.title, this.url, this.icon});
 }
 
 const List<Photo> photos = <Photo>[
   const Photo(
+    index: 0,
       title: const Text('ImageOne'),
       url: _imageUrlOne,
       icon: const Icon(Icons.looks_one)),
   const Photo(
+      index: 1,
       title: const Text('ImageTwo'),
       url: _imageUrlTwo,
       icon: const Icon(Icons.looks_two)),
   const Photo(
+      index: 2,
       title: const Text('ImageThree'),
       url: _imageUrlThree,
       icon: const Icon(Icons.looks_3)),
@@ -47,6 +51,7 @@ class LoadImageState extends State<LoadImage> {
 
   void _selectedPhoto(Photo photo) {
     setState(() {
+      _bottomNavBarIndex = photo.index;
       _selectedPhotos = photo;
     });
   }
@@ -110,7 +115,6 @@ class LoadImageState extends State<LoadImage> {
         currentIndex: _bottomNavBarIndex,
         onTap: (int index) {
           setState(() {
-            _bottomNavBarIndex = index;
             _selectedPhoto(photos[index]);
           });
         },
