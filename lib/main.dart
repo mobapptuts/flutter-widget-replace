@@ -22,7 +22,7 @@ class Photo {
 
 const List<Photo> photos = <Photo>[
   const Photo(
-    index: 0,
+      index: 0,
       title: const Text('ImageOne'),
       url: _imageUrlOne,
       icon: const Icon(Icons.looks_one)),
@@ -46,17 +46,15 @@ class LoadImage extends StatefulWidget {
 }
 
 class LoadImageState extends State<LoadImage>
-  with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   Photo _selectedPhotos = photos[0];
   int _bottomNavBarIndex = 0;
   TabController _tabController;
-
 
   @override
   void initState() {
     _tabController = new TabController(length: photos.length, vsync: this);
   }
-
 
   @override
   void dispose() {
@@ -91,6 +89,23 @@ class LoadImageState extends State<LoadImage>
             onSelected: _selectedPhoto,
           )
         ],
+        bottom: new TabBar(
+          controller: _tabController,
+          tabs: [
+            new Tab(
+              text: photos[0].title.data,
+              icon: photos[0].icon,
+            ),
+            new Tab(
+              text: photos[1].title.data,
+              icon: photos[1].icon,
+            ),
+            new Tab(
+              text: photos[2].title.data,
+              icon: photos[2].icon,
+            ),
+          ],
+        ),
       ),
       drawer: new Drawer(
         child: new ListView(
